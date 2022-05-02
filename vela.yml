@@ -1,0 +1,17 @@
+name: mtcu-mobbing
+services:
+  mtcu-mobbing:
+    type: snstateless
+    ports:
+      - name: http
+        containerPort: 4000
+        servicePort: 8080
+        protocol: http
+    image: eu.gcr.io/halfpipe-io/mtcu-mobbing:${BUILD_VERSION}
+    resources:
+      cpu: 1
+      memory: 1Gi
+    sningress:
+      routes:
+        - route: mtcu-mobbing-dev.apps.private.k8s.springernature.io
+          servicePort: 8080
